@@ -155,6 +155,29 @@ void merge(char *msbpFilename, char *attrFilename, char *msbtFilename, char *out
 }
 
 int main(int argc, char **argv) {
+    if (argc == 1) {
+        printf("\
+tl-attr-tool [command]\n\
+\n\
+    extract [msbp] [msbt] [output]\n\
+        Extract the attribute values from an MSBT file into a human readable and \n\
+        editable TOML file.\n\
+\n\
+        msbp - decompressed .msbp.txt file which contains the attribute \n\
+        definitions for the MSBT file\n\
+        msbt - decompressed .msbt.txt file\n\
+\n\
+    merge [msbp] [attr] [msbt] [output]\n\
+        Merge an edited attribute file with the MSBT file it was extracted from \n\
+        to produce an edited MSBT file.\n\
+\n\
+        msbp - decompressed .msbp.txt file belonging to the original MSBT file\n\
+        attr - extracted attribute file\n\
+        msbt - original decompressed .msbt.txt file\n\
+");
+        return 1;
+    }
+
     char *command = argv[1];
 
     if (strlen(command) >= 7 && (strncmp("extract", command, 7) == 0)) {
